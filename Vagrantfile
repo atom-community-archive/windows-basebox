@@ -17,10 +17,11 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision "shell", inline: "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))"
-  config.vm.provision "shell", inline: "choco install -y 7zip git python2"
+  config.vm.provision "shell", inline: "choco install -y 7zip git python2 dotnet4.6"
   config.vm.provision "shell", path: "scripts/install-node.ps1"
   config.vm.provision "shell", inline: "choco install -y visualstudio2015community"
-  config.vm.provision "shell", inline: "mkdir c:\\Users\\vagrant\\github"
-  config.vm.provision "shell", inline: "git clone https://github.com/atom/atom.git c:\\Users\\vagrant\\github\\atom"
-  config.vm.provision "shell", inline: "c:\\Users\\vagrant\\github\\atom\\script\\build.cmd"
+  config.vm.provision "shell", inline: "mkdir C:\\Users\\vagrant\\github"
+  config.vm.provision "shell", inline: "git clone https://github.com/atom/atom.git C:\\Users\\vagrant\\github\\atom"
+  config.vm.provision "shell", path: "scripts/set-variables.ps1"
+  config.vm.provision "shell", inline: "C:\\Users\\vagrant\\github\\atom\\script\\build.cmd"
 end
